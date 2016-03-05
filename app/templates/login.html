@@ -1,0 +1,48 @@
+{# index.html #}
+{% extends "base.html" %}
+
+{% block content %}
+
+    <a href="/">Home</a>
+
+    {# Check for errors. #}
+    {% if result.error %}
+        <h2>Damn that error: {{ result.error.message }}</h2>
+    {% endif %}
+
+    {# Welcome the user. #}
+    {% if result.user %}
+        <h1>Hi {{ result.user.name }}</h1>
+        <h2>Your id is: {{ result.user.id }}</h2>
+        <h2>Your email is: {{ result.user.email }}</h2>
+    {% endif %}
+
+    {# If the user has credentials, we can access his/her protected resources. #}
+    {% if result.user.credentials %}
+        {# Let's get the user's 5 most recent statuses. #}
+            Your are logged in with Facebook.<br />
+
+            {# Insert the user's ID to the URL and access the resource. #}
+            {% set url = 'https://graph.facebook.com/{0}?fields=feed.limit(5)'.format(result.user.id) %}
+            {% set response = result.provider.access(url) %}
+
+            {# Parse the response. #}
+            {% if response.status == 200 %}
+
+                {% if response.data.error %}
+                    Damn that error: {{ response.data.error }}!
+                {% endif %}
+
+                {% if response.data.feed.data %}
+                    Your 5 most recent statuses:<br />
+
+                    {% for status in response.data.feed.data %}
+                        <h3>{{ status.message or status.name or status.story }}</h3>
+                        Posted on: {{ status.created_time }}
+                    {% endfor %}
+                {% endif %}
+
+            {% endif %}{# response.status == 200 #}
+    {% endif %}{# result.user.credentials #}
+
+{% endblock content %}
