@@ -5,6 +5,15 @@
         <h1>Email form</h1>
     </div>
     <!--Links to the login handler-->
-    Login with <a href="login/fb">Facebook</a>.<br />
+    Login with <a href="login/fb">
+                <img src="{{ url_for('static', filename='images/FB-f-Logo__blue_29.png') }}" width="16px" height="16px"> Facebook</a>.<br />
 
+
+
+    <div class="page-footer"
+        class="fb-like"
+        data-share="true"
+        data-width="450"
+        data-show-faces="true">
+    </div>
 {% endblock %}

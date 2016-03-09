@@ -30,11 +30,11 @@ CONFIG = {
         'class_': oauth2.Facebook,
 
         # Facebook is an AuthorizationProvider too.
-        'consumer_key': '548717931973687',
-        'consumer_secret': '40ca3d9b536946bfb6818c27fd8dda8b',
+        'consumer_key': '1732750360274136',
+        'consumer_secret': 'f15127605879b24f03651c38f7bb9663',
 
         # But it is also an OAuth 2.0 provider and it needs scope.
-        'scope': ['user_about_me', 'email', 'user_posts'],  # , 'publish_stream'
+        'scope': ['user_about_me', 'email', 'user_posts', 'user_likes'],  # , 'publish_stream'
     },
 
     'oi': {
